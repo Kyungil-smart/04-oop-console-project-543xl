@@ -29,6 +29,13 @@ public class TownScene : Scene
                 _field[y, x] = new Tile(pos);
             }
         }
+        
+        _field[3, 5].OnTileObject = new Potion() {Name = "Potion1"};
+        _field[2, 15].OnTileObject = new Potion() {Name = "Potion2"};
+        _field[7, 3].OnTileObject = new Potion() {Name = "Potion3"};
+        _field[9, 19].OnTileObject = new Potion() {Name = "Potion4"};
+        _field[5, 5].OnTileObject = _npc;
+        _field[9, 10].OnTileObject = _questItem;
     }
 
     public override void Enter()
@@ -37,14 +44,6 @@ public class TownScene : Scene
         if (_nextStartPosition.Equals(new Vector(-1,-1))) _player.Position = setPlayerPosition;
         else _player.Position = _nextStartPosition;
         _field[_player.Position.Y, _player.Position.X].OnTileObject = _player;
-        
-
-        _field[3, 5].OnTileObject = new Potion() {Name = "Potion1"};
-        _field[2, 15].OnTileObject = new Potion() {Name = "Potion2"};
-        _field[7, 3].OnTileObject = new Potion() {Name = "Potion3"};
-        _field[9, 19].OnTileObject = new Potion() {Name = "Potion4"};
-        _field[5, 5].OnTileObject = _npc;
-        _field[9, 10].OnTileObject = _questItem;
         
         Debug.Log("타운 씬 진입");
     }
