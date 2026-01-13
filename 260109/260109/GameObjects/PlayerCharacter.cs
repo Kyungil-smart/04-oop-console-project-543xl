@@ -88,16 +88,14 @@ public class PlayerCharacter : GameObject
         Vector nextPos = Position + direction;
         
         if (nextPos.Y < 0 || nextPos.Y >= Field.GetLength(0)
-                          || nextPos.X < 0 || nextPos.X >= Field.GetLength(1) )// npc 접근 불가 기능 추가
+                          || nextPos.X < 0 || nextPos.X >= Field.GetLength(1))// npc 접근 불가 기능 추가
         {
             return;
         }
         
         GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
-        
-        // 1. 맵 바깥은 아닌지?
-        // 2. 벽인지?
-        
+
+        if (nextTileObject is Npc npc) return;
         
         if (nextTileObject != null)
         {
