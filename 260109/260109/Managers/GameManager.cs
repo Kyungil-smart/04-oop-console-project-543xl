@@ -60,7 +60,7 @@ public class GameManager
         
         SceneManager.AddScene("Title", new TitleScene());
         SceneManager.AddScene("Story", new StoryScene());
-        SceneManager.AddScene("Town", new TownScene(_player,_npc));
+        SceneManager.AddScene("Town", new TownScene(_player,_npc,questItem));
         SceneManager.AddScene("Log", new LogScene());
         SceneManager.AddScene("Quest", new QuestScene(_player));
         

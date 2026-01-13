@@ -8,13 +8,15 @@ public class TownScene : Scene
     private Tile[,] _field = new Tile[10, 20];
     private PlayerCharacter _player;
     private Npc _npc;
+    private Item _questItem;
     
-    public TownScene(PlayerCharacter player,Npc npc) => Init(player, npc);
+    public TownScene(PlayerCharacter player,Npc npc,Item item) => Init(player, npc, item);
 
-    public void Init(PlayerCharacter player, Npc npc)
+    public void Init(PlayerCharacter player, Npc npc, Item item)
     {
         _player = player;
         _npc = npc;
+        _questItem = item;
         
         for (int y = 0; y < _field.GetLength(0); y++)
         {
@@ -31,13 +33,14 @@ public class TownScene : Scene
         _player.Field = _field;
         _player.Position = new Vector(4, 2);
         _field[_player.Position.Y, _player.Position.X].OnTileObject = _player;
+        
 
         _field[3, 5].OnTileObject = new Potion() {Name = "Potion1"};
         _field[2, 15].OnTileObject = new Potion() {Name = "Potion2"};
         _field[7, 3].OnTileObject = new Potion() {Name = "Potion3"};
         _field[9, 19].OnTileObject = new Potion() {Name = "Potion4"};
         _field[5, 5].OnTileObject = _npc;
-        _field[9, 19].OnTileObject = new Tree() {Name = "Tree"};
+        _field[9, 19].OnTileObject = _questItem;
         
         Debug.Log("타운 씬 진입");
     }
