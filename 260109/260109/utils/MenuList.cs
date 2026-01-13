@@ -83,6 +83,20 @@ public class MenuList
     public void RemoveAt(int index)
     {
         _menus.RemoveAt(index);
+        
+        int max = 0;
+        
+        foreach ((string text, Action action) in _menus)
+        {
+            int textWidth = text.GetTextWidth();
+
+            if (max < textWidth) max = textWidth;
+        }
+        
+        if(_maxLength != max) _maxLength = max;
+        
+        _outline.Width = _maxLength + 6;
+        _outline.Height--;
     }
 
     public void SelectUp()
