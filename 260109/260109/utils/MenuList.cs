@@ -80,6 +80,11 @@ public class MenuList
         _outline.Height--;
     }
 
+    public void RemoveAt(int index)
+    {
+        _menus.RemoveAt(index);
+    }
+
     public void SelectUp()
     {
         _currentIndex--;

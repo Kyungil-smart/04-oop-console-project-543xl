@@ -23,8 +23,14 @@ public class Inventory
 
     public void Remove(Item item)
     {
-        _items.Remove(item);
-        _itemMenu.Remove();
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i].Name == item.Name)   // 같은 이름 제거
+            {
+                _items.RemoveAt(i);
+                _itemMenu.RemoveAt(i);        
+            }
+        }
     }
 
     public void Render()
