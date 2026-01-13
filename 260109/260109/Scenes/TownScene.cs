@@ -1,15 +1,20 @@
 ﻿
 
+using _260109.GameObjects;
+using _260109.Managers;
+
 public class TownScene : Scene
 {
     private Tile[,] _field = new Tile[10, 20];
     private PlayerCharacter _player;
+    private Npc _npc;
     
-    public TownScene(PlayerCharacter player) => Init(player);
+    public TownScene(PlayerCharacter player,Npc npc) => Init(player, npc);
 
-    public void Init(PlayerCharacter player)
+    public void Init(PlayerCharacter player, Npc npc)
     {
         _player = player;
+        _npc = npc;
         
         for (int y = 0; y < _field.GetLength(0); y++)
         {
@@ -31,6 +36,8 @@ public class TownScene : Scene
         _field[2, 15].OnTileObject = new Potion() {Name = "Potion2"};
         _field[7, 3].OnTileObject = new Potion() {Name = "Potion3"};
         _field[9, 19].OnTileObject = new Potion() {Name = "Potion4"};
+        _field[5, 5].OnTileObject = _npc;
+        _field[9, 19].OnTileObject = new Tree() {Name = "Tree"};
         
         Debug.Log("타운 씬 진입");
     }
@@ -48,8 +55,7 @@ public class TownScene : Scene
 
     public override void Exit()
     {
-        _field[_player.Position.Y, _player.Position.X].OnTileObject = null;
-        _player.Field = null;
+        
     }
 
     private void PrintField()

@@ -120,4 +120,10 @@ public class MenuList
             }
         }
     }
+
+    public void Clear()
+    {
+        _menus.Clear();
+    }
+    
 }

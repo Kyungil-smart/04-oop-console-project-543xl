@@ -13,7 +13,8 @@ public static class InputManager
         ConsoleKey.Enter,
         ConsoleKey.I,
         ConsoleKey.L,
-        ConsoleKey.T
+        ConsoleKey.T,
+        ConsoleKey.E    // 상호작용 키 추가
     };
 
     public static bool GetKey(ConsoleKey input)

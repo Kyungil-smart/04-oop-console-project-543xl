@@ -51,4 +51,10 @@ public class Inventory
         if(!IsActive) return;
         _itemMenu.SelectDown();
     }
+
+    public bool Contain(Item item)  // 아이템 있는지 확인
+    {
+        if (_items.Contains(item)) return true;
+        return false;
+    }
 }

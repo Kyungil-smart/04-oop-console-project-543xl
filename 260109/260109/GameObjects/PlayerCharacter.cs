@@ -1,6 +1,8 @@
 ﻿
 
 using System.Runtime.InteropServices.Marshalling;
+using _260109.GameObjects;
+using _260109.utils;
 
 public class PlayerCharacter : GameObject
 {
@@ -10,7 +12,8 @@ public class PlayerCharacter : GameObject
     private string _manaGauge;
     
     public Tile[,] Field { get; set; }
-    private Inventory _inventory;
+    public Inventory _inventory;
+    private Npc _npc;
     public bool IsActiveControl { get; private set; }
 
     public PlayerCharacter() => Init();
@@ -64,6 +67,36 @@ public class PlayerCharacter : GameObject
         {
             Health.Value--;
         }
+        
+        if (InputManager.GetKey(ConsoleKey.E))
+        {
+            Vector[] directions =
+            {
+                new Vector(0, -1), 
+                new Vector(0, 1),  
+                new Vector(-1, 0), 
+                new Vector(1, 0)   
+            };
+
+            foreach (Vector d in directions)
+            {
+                Vector checkPos = Position + d;
+
+                // 맵 바깥 체크
+                if (checkPos.Y < 0 || checkPos.Y >= Field.GetLength(0)
+                                   || checkPos.X < 0 || checkPos.X >= Field.GetLength(1))
+                    continue;
+
+                // 해당 타일의 오브젝트 가져오기
+                GameObject obj = Field[checkPos.Y, checkPos.X].OnTileObject;
+                
+                if (obj is Npc npc)
+                {
+                    npc.Interact(this);
+                    break; 
+                }
+            }
+        }
     }
 
     public void HandleControl()
@@ -80,11 +113,16 @@ public class PlayerCharacter : GameObject
         Vector current = Position;
         Vector nextPos = Position + direction;
         
+        GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
+        
         // 1. 맵 바깥은 아닌지?
         // 2. 벽인지?
-
-        GameObject nextTileObject = Field[nextPos.Y, nextPos.X].OnTileObject;
-
+        if (nextPos.Y < 0 || nextPos.Y >= Field.GetLength(0)
+                          || nextPos.X < 0 || nextPos.X >= Field.GetLength(1) )// npc 접근 불가 기능 추가
+        {
+            return;
+        }
+        
         if (nextTileObject != null)
         {
             if (nextTileObject is IInteractable)
