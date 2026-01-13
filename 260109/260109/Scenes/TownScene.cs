@@ -52,6 +52,7 @@ public class TownScene : Scene
 
     public override void Render()
     {
+        PrintUI();
         PrintField();
         _player.Render();
     }
@@ -59,6 +60,19 @@ public class TownScene : Scene
     public override void Exit()
     {
         
+    }
+    
+    private void PrintUI()
+    {
+        // 화면 맨 위 고정
+        Console.SetCursorPosition(0, 0);
+        _player._healthGauge.Print(ConsoleColor.Red);
+    
+        Console.SetCursorPosition(0, 1);
+        _player._manaGauge.Print(ConsoleColor.Blue);
+        
+        // UI와 맵 사이 한 줄 띄우기
+        Console.SetCursorPosition(0, 3);
     }
 
     private void PrintField()
