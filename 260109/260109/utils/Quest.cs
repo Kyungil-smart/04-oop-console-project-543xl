@@ -51,6 +51,6 @@ public class Quest
         State = QuestState.Completed;
 
         // 보상
-        inventory.Add(new Potion());
+        inventory.Add(new Potion { Name = "rewardPotion" });
     }
 }
