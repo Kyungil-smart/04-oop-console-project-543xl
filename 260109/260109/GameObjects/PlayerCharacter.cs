@@ -182,7 +182,13 @@ public class PlayerCharacter : GameObject
         foreach (Vector d in directions)
         {
             Vector checkPos = Position + d;
-                
+            
+            if (checkPos.Y < 0 || checkPos.Y >= Field.GetLength(0)
+                               || checkPos.X < 0 ||checkPos.X >= Field.GetLength(1))
+            {
+                return;
+            }
+            
             // 해당 타일의 오브젝트 가져오기
             GameObject obj = Field[checkPos.Y, checkPos.X].OnTileObject;
                 
