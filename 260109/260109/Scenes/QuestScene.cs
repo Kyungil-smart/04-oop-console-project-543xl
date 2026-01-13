@@ -12,7 +12,6 @@ public class QuestScene : Scene
     private Quest _quest;
     
     public MenuList _menu { get; set; }
-    public Inventory inventory { get; set; }
 
     public QuestScene(PlayerCharacter player)
     {

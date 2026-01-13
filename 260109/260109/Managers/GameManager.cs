@@ -38,29 +38,17 @@ public class GameManager
         SceneManager.OnChangeScene += InputManager.ResetKey;
         _player = new PlayerCharacter();
         
-        Item questItem = new Tree
-        {
-            Name = "나무"
-        };
-        
-        QuestData questData = new QuestData(
-            title: "나무 가져오기",
-            description: "마을에서 나무 하나를 가져다줘.",
-            requiredItem: questItem,
-            requiredItemCount: 1
-        );
-
-        Quest quest = new Quest(questData);
+        Quest woodQuest = new Quest(QuestDatabase.WoodQuestData);
         
         _npc = new Npc
         {
             Name = "NPC",
-            Quest = quest
+            Quest = woodQuest
         };
         
         SceneManager.AddScene("Title", new TitleScene());
         SceneManager.AddScene("Story", new StoryScene());
-        SceneManager.AddScene("Town", new TownScene(_player,_npc,questItem));
+        SceneManager.AddScene("Town", new TownScene(_player,_npc,woodQuest.Data.requiredItem));
         SceneManager.AddScene("Log", new LogScene());
         SceneManager.AddScene("Quest", new QuestScene(_player));
         
