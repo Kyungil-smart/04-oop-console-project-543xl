@@ -71,7 +71,7 @@ public class QuestScene : Scene
 
     public override void Exit()
     {
-        // 수락 또는 포기시에 해당 기능 수행하고 종료
+        // 퀘스트 신 종료시에 플레이어 위치가 이어서 작동되도록
     }
 
     public void PrintQuest(Quest quest)

@@ -9,6 +9,9 @@ public class TownScene : Scene
     private PlayerCharacter _player;
     private Npc _npc;
     private Item _questItem;
+    public Vector _nextStartPosition;
+    
+    public Vector setPlayerPosition = new Vector(4, 2);
     
     public TownScene(PlayerCharacter player,Npc npc,Item item) => Init(player, npc, item);
 
@@ -31,7 +34,8 @@ public class TownScene : Scene
     public override void Enter()
     {
         _player.Field = _field;
-        _player.Position = new Vector(4, 2);
+        if (_nextStartPosition.Equals(new Vector(-1,-1))) _player.Position = setPlayerPosition;
+        else _player.Position = _nextStartPosition;
         _field[_player.Position.Y, _player.Position.X].OnTileObject = _player;
         
 
@@ -59,7 +63,7 @@ public class TownScene : Scene
 
     public override void Exit()
     {
-        
+        _nextStartPosition = _player.Position;
     }
     
     private void PrintUI()
